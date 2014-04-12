@@ -51,7 +51,11 @@ nnoremap <leader>w= <c-w>=
 nnoremap <leader>; <c-^><cr>
 
 " Whitespace cleaner
-nnoremap <leader><BS> mz:%s/\v\s+$//g<cr>:ret<cr>`z
+nnoremap <leader><BS> mz:ret<cr>:%s/\v\s+$//g<cr>`z
+
+" Tab Width Toggles
+noremap <leader>2 :set ai et ts=2 sts=2 sw=2<cr>
+noremap <leader>4 :set ai et ts=4 sts=4 sw=4<cr>
 
 " Commands
 nnoremap <leader>R @:<cr>
@@ -153,7 +157,7 @@ endif
 let g:ctrlp_show_hidden = 1             "Start with CtrlP not working dotfiles
 let g:ctrlp_match_window_reversed = 1   "Show matched starting frm bottom
 let g:ctrlp_switch_buffer = 0           "Open new instances regardless if open
-let g:ctrlp_by_filename = 1             "Default filename search
+let g:ctrlp_by_filename = 0             "Default filename search
 let g:ctrlp_clear_cache_on_exit = 0     "Keep corss session cache
 let g:ctrlp_working_path_mode = 0       "Don't set local dir on every invoke
 
@@ -185,6 +189,7 @@ if executable('ag')
 endif
 
 let g:agprg = 'ag --column -i'
+
 
 "======================================
 "   TSLIME
@@ -289,8 +294,9 @@ autocmd Filetype conf setlocal syntax=sh
 autocmd Filetype conf,sh,zsh setlocal ai ts=4 sts=4 et sw=4
 
 " HTML/Jade
-autocmd Filetype html setlocal ai ts=4 sts=4 et sw=4
+autocmd Filetype html setlocal ai ts=2 sts=2 et sw=2
 autocmd Filetype jade setlocal ai ts=2 sts=2 et sw=2
+autocmd BufRead,BufNewFile *.handlebars setlocal filetype=html
 
 " Python
 autocmd Filetype python setlocal ai ts=4 sts=4 et sw=4
