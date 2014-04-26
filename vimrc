@@ -216,7 +216,7 @@ nnoremap <leader>tl :call RunLastSpec()<CR>
 "======================================
 " Tagbar
 let g:tagbar_autofocus = 1
-let g:tagbar_left = 1
+let g:tagbar_left = 0
 let g:tagbar_width = 30
 
 " CoffeeTags
@@ -238,8 +238,8 @@ endif
 
 " Index ctags and open tagbar
 nnoremap <Leader>ct :!ctags -R .<CR>
-nnoremap <leader>[ :TagbarToggle<CR><c-w>=
-nnoremap <leader>] :TagbarTogglePause<CR>
+nnoremap <leader>] :TagbarToggle<CR><c-w>=
+nnoremap <leader>[ :TagbarTogglePause<CR>
 
 
 "======================================
