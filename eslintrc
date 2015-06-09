@@ -27,6 +27,7 @@
     "no-comma-dangle": 0,
     "no-cond-assign": 0,
     "no-empty": 0,
+    "no-loop-func": 0,
     "no-multi-spaces": 0,
     "no-new": 0,
     "no-process-exit": 0,
@@ -38,7 +39,7 @@
     "no-trailing-spaces": 1,
     "no-var": 2,
     "quotes": 0,
-    "semi": 0,
+    "semi": 2,
     "strict": 0,
     "yoda": 1,
 

@@ -31,31 +31,15 @@ alias grep='grep --color=auto'
 alias rsync="rsync -vrei --delete"
 alias rf="unalias -a && source $HOME/.profile"
 alias path="echo $PATH | tr ':' '\n'"
-alias rmvimtmp="rm -f $DOT/vim/tmp/vim_undo/*"
 alias ghi="ghci 2>&1 | HsColour -tty"
 
-# Rails
-USERAILS='false'
-if [[ "$USERAILS" = "true" ]]; then
-    alias rl="rails"
-    alias rk="rake"
-    alias zs="zeus"
-    alias zcs="clear && zeus start"
-    alias fs="foreman start"
-    alias glr="guard -P livereload"
-    alias b="bundle"
-    alias be="bundle exec"
-    alias migrate="rake db:migrate && rake db:rollback && rake db:migrate"
-    alias m="migrate && rake db:test:prepare"
-    alias mr="migrate && rake db:reset"
-fi
 
 # JS/Coffee
 alias cf="coffee"
 alias gp="gulp"
 alias nd="node"
 alias bw="bower"
-alias cfl="coffeelint -q -f ~/.coffeelint.json **/*.coffee"
+alias cfl="coffeelint -q -f ~/.coffeelintrc **/*.coffee"
 
 # NPM
 alias nod="npm outdated --depth=0"

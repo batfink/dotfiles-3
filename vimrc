@@ -13,7 +13,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'digitaltoad/vim-jade'
 Plug 'geekjuice/vim-picoline'
-Plug 'geekjuice/vim-spec'
+Plug 'geekjuice/vim-mocha'
 Plug 'jgdavey/tslime.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'kchmck/vim-coffee-script'
@@ -65,8 +65,8 @@ nnoremap <leader>h :set invhlsearch hlsearch?<CR>
 
 " Read/Write
 nnoremap <leader>q <esc>:q
-nnoremap <leader>w <esc>:w<CR>:echoe "File saved"<cr>
-nnoremap <leader>S <esc>:mks!<cr>:echoe "Session saved"<cr>
+nnoremap <leader>w <esc>:w<CR>:echo "File saved"<cr>
+nnoremap <leader>S <esc>:mks!<cr>:echo "Session saved"<cr>
 nnoremap <leader>W :w !sudo tee > /dev/null %<cr>
 
 " Splits
@@ -81,11 +81,11 @@ nnoremap <leader>t :tabnew<cr>
 nnoremap <leader>; <c-^><cr>
 
 " Whitespace cleaner
-nnoremap <leader><BS> mz:ret<cr>:%s/\v\s+$//ge<cr>:echoe "Whitespace cleaned"<cr>`z
+nnoremap <leader><BS> mz:ret<cr>:%s/\v\s+$//ge<cr>:echo "Whitespace cleaned"<cr>`z
 
 " Tab Width Toggles
-noremap <leader>2 :set ai et ts=2 sts=2 sw=2<cr>:echoe "Tabs: 2"<cr>
-noremap <leader>4 :set ai et ts=4 sts=4 sw=4<cr>:echoe "Tabs: 4"<cr>
+noremap <leader>2 :set ai et ts=2 sts=2 sw=2<cr>:echo "Tabs: 2"<cr>
+noremap <leader>4 :set ai et ts=4 sts=4 sw=4<cr>:echo "Tabs: 4"<cr>
 
 " Commands
 nnoremap <leader>r @:
@@ -109,10 +109,10 @@ nnoremap Q <Nop>
 nnoremap / :set hlsearch<CR>/
 
 " Get off my lawn
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
+nnoremap <Left> :echo "Use h"<CR>
+nnoremap <Right> :echo "Use l"<CR>
+nnoremap <Up> :echo "Use k"<CR>
+nnoremap <Down> :echo "Use j"<CR>
 
 " Switch ctrl-movement keys to window switching
 nmap <C-k> <C-w><Up>
@@ -262,18 +262,28 @@ nnoremap <leader>: :Tmux<space>
 
 
 "======================================
-"   VIM-SPEC
+"   VIM-MOCHA
 "======================================
-" NOTE: Consider Different mappings for TSlime and no TSlime (same mapping?)
-let g:rspec_command = 'call Send_to_Tmux("arspec {spec}\n")'
-let g:mocha_coffee_command = 'call Send_to_Tmux("cortado {spec}\n")'
-let g:mocha_js_command = 'call Send_to_Tmux("cortado {spec}\n")'
+let g:vim_mocha_use_tmux = 0
+nnoremap <leader>tm :call VimMochaToggleTmux()<cr>
+
+func! VimMochaToggleTmux()
+  if g:vim_mocha_use_tmux
+    let g:vim_mocha_use_tmux = 0
+    let g:mocha_js_command = '!cortado {spec}'
+    echo "[vim-mocha] Using tmux"
+  else
+    let g:vim_mocha_use_tmux = 1
+    let g:mocha_js_command = 'call Send_to_Tmux("cortado {spec}\n")'
+    echo "[vim-mocha] Not using tmux"
+  endif
+endfunction
 
 " Vim-spec mappings
-nnoremap <leader>ta :call RunAllSpecs()<CR>
-nnoremap <leader>tt :call RunCurrentSpecFile()<CR>
-nnoremap <leader>ts :call RunNearestSpec()<CR>
-nnoremap <leader>tl :call RunLastSpec()<CR>
+nnoremap <leader>ta :call RunAllSpecs()<cr>
+nnoremap <leader>tt :call RunCurrentSpecFile()<cr>
+nnoremap <leader>ts :call RunNearestSpec()<cr>
+nnoremap <leader>tl :call RunLastSpec()<cr>
 
 
 "======================================
