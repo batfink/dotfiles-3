@@ -16,6 +16,8 @@ Plug 'geekjuice/vim-picoline'
 Plug 'geekjuice/vim-mocha'
 Plug 'jgdavey/tslime.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'junegunn/vim-xmark', { 'do': 'make' }
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -271,11 +273,11 @@ func! VimMochaToggleTmux()
   if g:vim_mocha_use_tmux
     let g:vim_mocha_use_tmux = 0
     let g:mocha_js_command = '!cortado {spec}'
-    echo "[vim-mocha] Using tmux"
+    echo "[vim-mocha] Not using tmux"
   else
     let g:vim_mocha_use_tmux = 1
     let g:mocha_js_command = 'call Send_to_Tmux("cortado {spec}\n")'
-    echo "[vim-mocha] Not using tmux"
+    echo "[vim-mocha] Using tmux"
   endif
 endfunction
 
@@ -395,6 +397,13 @@ let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
 
 
+"======================================
+"   LIMELIGHT
+"======================================
+nnoremap <leader>ll :Limelight!!<cr>
+let g:limelight_default_coefficient = 0.8
+
+
 
 "======================================
 "   SYNTAX/FILETYPE/HIGHLIGHT
@@ -435,6 +444,10 @@ autocmd Filetype json nnoremap <leader>j :%!jq .<cr>
 
 " CJSX
 autocmd BufRead,BufNewFile *.cjsx let g:syntastic_coffee_checkers = []
+
+" Goyo + Limelight
+autocmd User GoyoEnter Limelight
+autocmd User GoyoLeave Limelight!
 
 
 " Set color depending on terminal color support
