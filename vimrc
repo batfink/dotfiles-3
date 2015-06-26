@@ -139,6 +139,9 @@ map <leader>[] :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> 
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 
+" Plug Updater
+nnoremap <leader>up :PlugUpgrade<cr>:PlugUpdate<cr>:PlugDiff<cr>
+
 
 "======================================
 "   SETTINGS
