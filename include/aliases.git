@@ -33,6 +33,7 @@ alias gpr="git pull-request"
 alias gsh="git stash"
 alias gsp="git stash pop"
 alias gsl="git stash list"
+alias gopen="git browse"
 
 # Suffix alias
 alias -g NP="--no-prompt"

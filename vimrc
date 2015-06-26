@@ -15,6 +15,7 @@ Plug 'digitaltoad/vim-jade'
 Plug 'geekjuice/vim-picoline'
 Plug 'geekjuice/vim-mocha'
 Plug 'jgdavey/tslime.vim'
+Plug 'henrik/vim-qargs'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
@@ -104,6 +105,14 @@ vnoremap <leader><tab> %
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
+" Clipboard
+vnoremap <leader>c "*y
+nnoremap <leader>v "*p
+
+" Vimrc
+nnoremap <silent> <leader>ve :e $MYVIMRC<cr>
+nnoremap <silent> <leader>vs :so $MYVIMRC<cr>:echo "VIMRC reloaded"<cr>
+
 " Screw Ex Mode
 nnoremap Q <Nop>
 
@@ -158,7 +167,8 @@ set ttyfast                             "faster screen refresh(?)
 set modelines=0                         "no modeline
 set number                              "show current line
 set relativenumber                      "use relative line numbers
-set updatetime=750                      "update time
+set updatetime=3600                     "update time
+set synmaxcol=160                       "prevent syntax on long lines
 
 " Tmp file settings
 set noswapfile
@@ -316,16 +326,23 @@ nnoremap <leader>g :GitGutterLineHighlightsToggle<cr>
 "======================================
 "   SYNTASTIC
 "======================================
-let g:syntastic_check_on_open = 1       "Check on open
+let g:syntastic_check_on_open = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 2
+let g:syntastic_check_on_wq = 0
+let g:syntastic_ignore_files = ['\.min\.']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_java_checkers = ['checkstyle']
 let g:syntastic_coffee_coffeelint_args = '--file ~/.coffeelintrc'
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_style_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_style_warning_symbol = "⚠"
 
-" Syntastic Toggle
-nnoremap <leader>e :SyntasticToggleMode<cr>
-
-" Eslint (Should output to quickfix)
-nnoremap <leader>jl :!eslint %<cr>
+" Bindings
+nnoremap <leader>et :SyntasticToggleMode<cr>
+nnoremap <leader>ec :SyntasticCheck<cr>
+nnoremap <leader>el :Errors<cr>
 
 
 "======================================
@@ -404,7 +421,6 @@ nnoremap <leader>ll :Limelight!!<cr>
 let g:limelight_default_coefficient = 0.8
 
 
-
 "======================================
 "   SYNTAX/FILETYPE/HIGHLIGHT
 "======================================
@@ -435,15 +451,8 @@ autocmd Filetype python setlocal ai ts=4 sts=4 et sw=4
 autocmd BufRead,BufNewFile *.ru setlocal filetype=ruby
 autocmd BufRead,BufNewFile Gemfile* setlocal filetype=ruby
 
-" Java/Gradle
-autocmd Filetype java,groovy setlocal ai ts=4 sts=4 et sw=4
-autocmd BufNewFile,BufRead *.gradle setlocal filetype=groovy
-
 " JSON
 autocmd Filetype json nnoremap <leader>j :%!jq .<cr>
-
-" CJSX
-autocmd BufRead,BufNewFile *.cjsx let g:syntastic_coffee_checkers = []
 
 " Goyo + Limelight
 autocmd User GoyoEnter Limelight

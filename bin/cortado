@@ -6,5 +6,6 @@ NODE_ENV=test mocha \
     --bail \
     --recursive \
     --reporter spec \
+    --compilers js:babel/register \
     --slow 2000 \
     "$@"
