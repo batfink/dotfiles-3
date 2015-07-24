@@ -345,6 +345,7 @@ let g:syntastic_style_warning_symbol = "⚠"
 " Bindings
 nnoremap <leader>et :SyntasticToggleMode<cr>
 nnoremap <leader>ec :SyntasticCheck<cr>
+nnoremap <leader>er :SyntasticReset<cr>
 nnoremap <leader>el :Errors<cr>
 
 
