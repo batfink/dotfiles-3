@@ -357,6 +357,7 @@ let NERDSpaceDelims = 1                 "Adds space between comments
 
 " NERDtree toggle
 nnoremap <leader>o :NERDTreeToggle<CR><c-w>=
+nnoremap <leader>ff :NERDTreeFind<CR><c-w>=
 
 
 "======================================

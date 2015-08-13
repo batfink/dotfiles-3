@@ -18,6 +18,7 @@ antigen bundle npm
 antigen bundle nvm
 antigen bundle tmux
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-history-substring-search
 antigen apply
 
 ##########################################
@@ -44,6 +45,10 @@ bindkey -M vicmd v edit-command-line
 
 # Use incremental search
 bindkey "^R" history-incremental-search-backward
+
+# Use substring search
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 # Handy keybindings
 bindkey "^P" history-search-backward

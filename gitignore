@@ -10,8 +10,6 @@
 .DS_Store
 *~
 .secret
-*DELETE_ME*
-*DEBUG*
 
 ### IntelliJ
 *.iml
