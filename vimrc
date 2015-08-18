@@ -19,11 +19,10 @@ Plug 'henrik/vim-qargs'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
@@ -148,6 +147,7 @@ nnoremap <leader>up :PlugUpgrade<cr>:PlugUpdate<cr>:PlugDiff<cr>
 "======================================
 syntax on
 filetype plugin indent on
+set rtp+=~/.fzf
 
 set nocompatible                        "user vim over vi settings
 set encoding=utf-8                      "utf8 encoding
@@ -172,6 +172,7 @@ set number                              "show current line
 set relativenumber                      "use relative line numbers
 set updatetime=3600                     "update time
 set synmaxcol=160                       "prevent syntax on long lines
+set cole=0                              "concealing characters
 
 " Tmp file settings
 set noswapfile
@@ -388,6 +389,16 @@ let g:goyo_callbacks = [ function('s:goyo_before'), function('s:goyo_after') ]
 "   JAVASCRIPT SYNTAX
 "======================================
 let g:jsx_ext_required = 0
+let g:javascript_enable_domhtmlcss  = 1
+let g:javascript_conceal_function   = "ƒ"
+let g:javascript_conceal_null       = "ø"
+let g:javascript_conceal_this       = "@"
+let g:javascript_conceal_return     = "⇚"
+let g:javascript_conceal_undefined  = "¿"
+let g:javascript_conceal_NaN        = "ℕ"
+let g:javascript_conceal_prototype  = "¶"
+let g:javascript_conceal_static     = "•"
+let g:javascript_conceal_super      = "Ω"
 
 
 "======================================

@@ -47,6 +47,17 @@ alias gsu="git submodule update"
 alias gml="grep path .gitmodules | sed -E 's/^.*\/(.+)$/\1/' | sort"
 alias gmll="grep path .gitmodules | sed 's/.*= //'"
 
+# Delete merged branchs
+gdm() {
+    git branch -r --merged |
+    grep origin |
+    grep -v '>' |
+    grep -v master |
+    xargs -L1 |
+    cut -d"/" -f2- |
+    xargs git push origin --delete
+}
+
 # GIT COMMIT DIFF STATS
 gds() {
     local isNumber='^[0-9]+$'
