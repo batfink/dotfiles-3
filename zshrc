@@ -55,7 +55,7 @@ bindkey "^P" history-search-backward
 bindkey "^Y" accept-and-hold
 bindkey "^N" insert-last-word
 bindkey -s "^S" "^[Isudo ^[A" # "s" for "sudo"
-bindkey -s "^T" "^[Itx ^[A"   # "t" for "tmux/transmit"
+bindkey -s "^Y" "^[Itx ^[A"   # "t" for "tmux/transmit"
 
 # Expand functions in the prompt
 setopt prompt_subst
@@ -69,6 +69,12 @@ export dirstacksize=5
 
 # Enable extended globbing
 setopt EXTENDED_GLOB
+
+
+##########################################
+# FZF
+##########################################
+[ -e "$DOT/include/fzf" ] && source "$DOT/include/fzf"
 
 
 ##########################################
@@ -123,12 +129,6 @@ fi
 
 
 ##########################################
-# FZF
-##########################################
-[ -e "$DOT/include/fzf" ] && source "$DOT/include/fzf"
-
-
-##########################################
 # HUBSPOT
 ##########################################
 [[ -s $HOME/.hsrc ]] && source $HOME/.hsrc
@@ -138,4 +138,3 @@ fi
 # Initiate TMUX
 ##########################################
 [[ -z "$TMUX" ]] && $SCRIPT/start_tmux.sh nick
-

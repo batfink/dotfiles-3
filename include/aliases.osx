@@ -25,7 +25,9 @@ alias code="cd $DROPBOX/Coding"
 # Homebrew
 alias bud="brew update && brew outdated"
 alias buc="brew upgrade && brew cleanup"
-alias bucc="buc && brewcleaner run $DOT/brew_whitelist.json"
+
+# DS_Store
+alias delete-ds-store='find ~ -name .DS_Store -delete'
 
 # System Commands
 vol() {

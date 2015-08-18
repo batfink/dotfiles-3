@@ -23,6 +23,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
@@ -103,6 +105,10 @@ vnoremap <leader><tab> %
 " Move Visual Blocks
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+" Increment/Decrement
+nnoremap <C-i> <C-a>
+nnoremap <C-x> <C-x>
 
 " Clipboard
 vnoremap <leader>c "*y

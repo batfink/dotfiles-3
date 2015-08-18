@@ -58,6 +58,18 @@ gdm() {
     xargs git push origin --delete
 }
 
+# Files changed in branch from master
+gbd() {
+    local branch="";
+    if [[ -z "$1" ]]; then
+        branch=$(git rev-parse --abbrev-ref HEAD)
+    else
+        branch="$1"
+    fi
+    echo $branch
+    git diff --name-only master...$branch
+}
+
 # GIT COMMIT DIFF STATS
 gds() {
     local isNumber='^[0-9]+$'
