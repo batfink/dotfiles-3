@@ -21,3 +21,17 @@ source "$HOME/.fzf/shell/key-bindings.zsh"
 export FZF_DEFAULT_COMMAND='ag -l -g ""'
 export FZF_DEFAULT_OPTS="--extended --multi --exit-0"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# Clean up from fzf install
+# NOTE: ~/.fzf/install resolves zshrc symlink...
+for shell in bash zsh; do
+    local rc="rc"
+    local config="$DOT/$shell$rc"
+    if [[ -f ~/.fzf.$shell ]]; then
+        rm -f ~/.fzf.$shell
+    fi
+    if [ -f $config ] || [ -L $config ]; then
+        sed -i '' '/source ~\/\.fzf\.(zsh|bash)/d' $config
+        sed -i '' '${/^$/d;}' ~/.$shell$rc
+    fi
+done
