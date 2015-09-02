@@ -30,8 +30,9 @@ for shell in bash zsh; do
         rm -f ~/.fzf.$shell
     fi
     if [ -f $config ] || [ -L $config ]; then
-        sed -i '' '/source ~\/\.fzf\.(zsh|bash)/d' $config
-        sed -i '' '${/^$/d;}' ~/.$shell$rc
+        sed -i '' '/\.fzf\.bash/d' $config
+        sed -i '' '/\.fzf\.zsh/d' $config
+        sed -i '' '${/^$/d;}' $config
     fi
 done
 

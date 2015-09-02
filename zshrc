@@ -124,6 +124,8 @@ export PATH=$PATH:$GOPATH/bin
 # Z
 ##########################################
 if command -v brew >/dev/null 2>&1; then
+    export _Z_DATA="/tmp/.z"
+    touch /tmp/.z
     [ -f $(brew --prefix)/etc/profile.d/z.sh ] && source $(brew --prefix)/etc/profile.d/z.sh
 fi
 
@@ -132,9 +134,3 @@ fi
 # HUBSPOT
 ##########################################
 [[ -s $HOME/.hsrc ]] && source $HOME/.hsrc
-
-
-##########################################
-# Initiate TMUX
-##########################################
-[[ -z "$TMUX" ]] && $SCRIPT/start_tmux.sh nick

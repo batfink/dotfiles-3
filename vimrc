@@ -10,36 +10,38 @@ let g:vimtmp = "~/.dotfiles/vim/tmp/"
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
+" Plug 'ap/vim-css-color'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'digitaltoad/vim-jade'
-Plug 'geekjuice/vim-picoline'
 Plug 'geekjuice/vim-mocha'
-Plug 'jgdavey/tslime.vim'
+Plug 'geekjuice/vim-picoline'
+Plug 'heavenshell/vim-jsdoc'
 Plug 'henrik/vim-qargs'
+Plug 'jgdavey/tslime.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+Plug 'mtscout6/vim-cjsx'
+Plug 'mxw/vim-jsx'
+Plug 'othree/html5.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'rking/ag.vim'
+Plug 'ryanss/vim-hackernews'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'Townk/vim-autoclose'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-haml'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-Plug 'rking/ag.vim'
-Plug 'majutsushi/tagbar'
-Plug 'othree/html5.vim'
-Plug 'mtscout6/vim-cjsx'
-Plug 'ryanss/vim-hackernews'
-Plug 'tpope/vim-haml'
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
-Plug 'Townk/vim-autoclose'
-Plug 'heavenshell/vim-jsdoc'
-Plug 'terryma/vim-multiple-cursors'
 
 call plug#end()
 
@@ -441,6 +443,16 @@ let g:multi_cursor_exit_from_insert_mode = 0
 "======================================
 nnoremap <leader>ll :Limelight!!<cr>
 let g:limelight_default_coefficient = 0.8
+
+
+"======================================
+"   FZF
+"======================================
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+let g:fzf_layout = { 'down': '20%' }
 
 
 "======================================
