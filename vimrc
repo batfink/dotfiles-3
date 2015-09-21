@@ -344,6 +344,7 @@ let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_wq = 0
 let g:syntastic_ignore_files = ['\.min\.']
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = 'eslint_d'
 let g:syntastic_java_checkers = ['checkstyle']
 let g:syntastic_coffee_coffeelint_args = '--file ~/.coffeelintrc'
 let g:syntastic_error_symbol = "✗"
