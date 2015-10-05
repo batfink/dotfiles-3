@@ -6,6 +6,13 @@
 vs() {
     [[ -f Session.vim ]] && vim "$@" -S Session.vim || vim "$@"
 }
+
+# Vim Last Session
+vls() {
+    local LAST_SESSION="~/.vim/tmp/last-session.vim"
+    [[ -f $LAST_SESSION ]] && vim "$@" -S $LAST_SESSION || vim "$@"
+}
+
 # Update NVM
 upgrade_nvm() {
     if [[ -d $NVM_DIR ]]; then
