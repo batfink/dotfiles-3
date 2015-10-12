@@ -490,8 +490,8 @@ autocmd BufRead,BufNewFile Gemfile* setlocal filetype=ruby
 autocmd Filetype json nnoremap <leader>j :%!jq .<cr>
 
 " Goyo + Limelight
-autocmd User GoyoEnter Limelight
-autocmd User GoyoLeave Limelight!
+" autocmd User GoyoEnter Limelight
+" autocmd User GoyoLeave Limelight!
 
 
 " Set color depending on terminal color support
