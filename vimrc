@@ -10,9 +10,9 @@ let g:vimtmp = "~/.dotfiles/vim/tmp/"
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
-" Plug 'ap/vim-css-color'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'digitaltoad/vim-jade'
+Plug 'garbas/vim-snipmate'
 Plug 'geekjuice/vim-mocha'
 Plug 'geekjuice/vim-picoline'
 Plug 'heavenshell/vim-jsdoc'
@@ -25,6 +25,7 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'majutsushi/tagbar'
 Plug 'mtscout6/vim-cjsx'
 Plug 'mxw/vim-jsx'
@@ -36,7 +37,9 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'tomtom/tlib_vim'
 Plug 'Townk/vim-autoclose'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-haml'
@@ -96,9 +99,8 @@ noremap <leader>4 :set ai et ts=4 sts=4 sw=4<cr>:echo "Tabs: 4"<cr>
 " Commands
 nnoremap <leader>r @:
 
-" Folding
-nnoremap <leader><leader> za
-vnoremap <leader><leader> zf
+" Relative numbers
+nnoremap <leader>rn :set relativenumber!<cr>
 
 " Bracket jump
 nnoremap <leader><tab> %
@@ -111,6 +113,14 @@ vnoremap K :m '<-2<CR>gv=gv
 " Increment/Decrement
 nnoremap <C-i> <C-a>
 nnoremap <C-x> <C-x>
+
+" Folding
+nnoremap <leader><leader> za
+vnoremap <leader><leader> zf
+
+" move to beginning/end of line
+nnoremap B ^
+nnoremap E $
 
 " Clipboard
 vnoremap <leader>c "*y
@@ -145,7 +155,6 @@ map <leader>[] :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> 
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-
 " Plug Updater
 nnoremap <leader>up :PlugUpgrade<cr>:PlugUpdate<cr>:PlugDiff<cr>
 
@@ -157,35 +166,41 @@ syntax on
 filetype plugin indent on
 set rtp+=~/.fzf
 
-set nocompatible                        "user vim over vi settings
-set encoding=utf-8                      "utf8 encoding
-set list listchars=tab:»·,trail:·       "tab and space chars (optional eol:¬)
-set laststatus=2                        "always display status line
-set fillchars=vert:\|,fold:-            "fill chars for status line
-set t_ut=                               "screen refresh issue with Tmux
-set ruler                               "row and column info
-set numberwidth=4                       "number gutter width
+set cole=0                              "concealing characters
+set complete=.,t                        "keep tab complete within file
 set cursorline                          "highlight current cursor line
-set incsearch                           "do incremental searching
+set encoding=utf-8                      "utf8 encoding
+set fillchars=vert:\|,fold:-            "fill chars for status line
 set hlsearch                            "highlight searches
-set showmatch                           "jump to first match
 set ignorecase                          "ignore case during search
-set smartcase                           "search uppercase if given
+set incsearch                           "do incremental searching
+set laststatus=2                        "always display status line
+set lazyredraw                          "redraw only when we need to.
+set list listchars=tab:»·,trail:·       "tab and space chars (optional eol:¬)
+set modelines=0                         "no modeline
+set nocompatible                        "user vim over vi settings
+set number                              "show current line
+set numberwidth=4                       "number gutter width
+set relativenumber                      "use relative line numbers
+set ruler                               "row and column info
 set scrolloff=999                       "keep cursor at the center
 set showcmd                             "display incomplete commands
-set complete=.,t                        "keep tab complete within file
+set showmatch                           "jump to first match
+set smartcase                           "search uppercase if given
+set synmaxcol=120                       "prevent syntax on long lines
+set t_ut=                               "screen refresh issue with Tmux
 set ttyfast                             "faster screen refresh(?)
-set modelines=0                         "no modeline
-set number                              "show current line
-set relativenumber                      "use relative line numbers
 set updatetime=3600                     "update time
-set synmaxcol=160                       "prevent syntax on long lines
-set cole=0                              "concealing characters
 
 " Tmp file settings
 set noswapfile
 set nobackup
 set nowritebackup
+
+set backup
+set backupdir=/var/tmp,/tmp
+set directory=~/var/tmp,/tmp
+set writebackup
 
 " Persistent Undo
 set undofile
@@ -268,7 +283,7 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-let g:agprg = 'ag --column -S'
+let g:ag_prg = 'ag --column -S'
 
 " Search mappings
 nnoremap K :Ag "\b<C-R><C-W>\b"<CR>
@@ -326,12 +341,12 @@ nnoremap <leader>[ :TagbarTogglePause<CR>
 "======================================
 "   GIT-GUTTER
 "======================================
-let g:gitgutter_escape_grep = 1         "Use raw grep
+let g:gitgutter_escape_grep = 1 "Use raw grep
 let g:gitgutter_realtime = 1
 let g:gitgutter_sign_modified = '#'
 let g:gitgutter_sign_modified_removed = '_'
 
-" Linehightlight Toggle
+" Line hightlight Toggle
 nnoremap <leader>g :GitGutterLineHighlightsToggle<cr>
 
 
@@ -454,6 +469,19 @@ let g:fzf_action = {
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
 let g:fzf_layout = { 'down': '20%' }
+
+
+"======================================
+"   SNIPMATE
+"======================================
+imap <C-j> <Plug>snipMateNextOrTrigger
+smap <C-j> <Plug>snipMateNextOrTrigger
+imap <C-k> <Plug>snipMateBack
+smap <C-k> <Plug>snipMateBack
+vmap <C-v> <Plug>snipMateVisual
+
+let g:snipMate = {}
+let g:snipMate.snippet_version = 1
 
 
 "======================================
