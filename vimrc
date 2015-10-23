@@ -40,6 +40,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tomtom/tlib_vim'
 Plug 'Townk/vim-autoclose'
 Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-haml'
@@ -482,6 +483,15 @@ vmap <C-v> <Plug>snipMateVisual
 
 let g:snipMate = {}
 let g:snipMate.snippet_version = 1
+
+
+"======================================
+"   SPOTIFY
+"======================================
+nnoremap msp :Dispatch! musigmachi spotify play<CR>
+nnoremap mss :Dispatch! musigmachi spotify pause<CR>
+nnoremap ms. :Dispatch! musigmachi spotify next<CR>
+nnoremap ms, :Dispatch! musigmachi spotify prev<CR>
 
 
 "======================================
