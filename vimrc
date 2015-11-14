@@ -26,7 +26,6 @@ Plug 'junegunn/vim-xmark', { 'do': 'make' }
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'majutsushi/tagbar'
 Plug 'mtscout6/vim-cjsx'
 Plug 'mxw/vim-jsx'
 Plug 'othree/html5.vim'
@@ -46,6 +45,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-haml'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 call plug#end()
 
@@ -64,14 +65,10 @@ noremap <c-c> <esc>
 
 " Colon -> Semicolon
 nnoremap ; :
+vnoremap ; :
 
 " Leader Commands
 let mapleader = " "
-
-" Toggles
-nnoremap <leader>p :set invpaste paste?<CR>
-nnoremap <leader>s :set invspell spell?<CR>
-nnoremap <leader>h :set invhlsearch hlsearch?<CR>
 
 " Read/Write
 nnoremap <leader>q <esc>:q
@@ -99,9 +96,6 @@ noremap <leader>4 :set ai et ts=4 sts=4 sw=4<cr>:echo "Tabs: 4"<cr>
 
 " Commands
 nnoremap <leader>r @:
-
-" Relative numbers
-nnoremap <leader>rn :set relativenumber!<cr>
 
 " Bracket jump
 nnoremap <leader><tab> %
@@ -324,19 +318,6 @@ nnoremap <leader>ta :call RunAllSpecs()<cr>
 nnoremap <leader>tt :call RunCurrentSpecFile()<cr>
 nnoremap <leader>ts :call RunNearestSpec()<cr>
 nnoremap <leader>tl :call RunLastSpec()<cr>
-
-
-"======================================
-"   CTAGS/TAGBAR
-"======================================
-" Tagbar
-let g:tagbar_autofocus = 1
-let g:tagbar_left = 0
-
-" Index ctags and open tagbar
-nnoremap <Leader>ct :!ctags -R .<CR>
-nnoremap <leader>] :TagbarToggle<CR><c-w>=
-nnoremap <leader>[ :TagbarTogglePause<CR>
 
 
 "======================================
