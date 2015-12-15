@@ -73,7 +73,7 @@ let mapleader = " "
 " Read/Write
 nnoremap <leader>q <esc>:q
 nnoremap <leader>w <esc>:w<CR>:echo "File saved"<cr>
-nnoremap <leader>S <esc>:mks!<cr>:echo "Session saved"<cr>
+nnoremap <leader>S <esc>:mks! .previous.vim<cr>:echo "Session saved"<cr>
 nnoremap <leader>W :w !sudo tee > /dev/null %<cr>
 
 " Splits
@@ -444,6 +444,13 @@ let g:limelight_default_coefficient = 0.8
 
 
 "======================================
+"   XMARK
+"======================================
+nnoremap <leader>mp :Xmark<cr>
+nnoremap <leader>mo :Xmark!<cr>
+
+
+"======================================
 "   FZF
 "======================================
 let g:fzf_action = {
@@ -476,16 +483,25 @@ nnoremap ms, :Dispatch! musigmachi spotify prev<CR>
 
 
 "======================================
+"   FUGITIVE
+"======================================
+nnoremap gaa :silent! Git add . \| redraw!<CR>
+nnoremap gac :silent! Git add . \| redraw! \| Gcommit<CR>
+nnoremap gst :Gstatus<CR>
+
+
+"======================================
 "   SYNTAX/FILETYPE/HIGHLIGHT
 "======================================
 " Auto save last session on close
-execute "autocmd VimLeave * mksession! " . g:vimtmp . "last-session.vim"
+execute "autocmd VimLeavePre * mksession! " . g:vimtmp . "previous.vim"
 
 " Git
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
 " Markdown
 autocmd BufRead,BufNewFile *.md setlocal spell textwidth=80 filetype=markdown
+autocmd Filetype markdown setlocal ai ts=4 sts=4 et sw=4
 
 " YAML
 autocmd BufRead,BufNewFile *.lyaml setlocal filetype=yaml

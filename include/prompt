@@ -50,7 +50,7 @@ multiline_prompt() {
 # AUTORUN COMMANDS
 ##########################################
 tmux_pane_pwd() {
-    [ -n "$TMUX" ] && tmux rename-window $(basename $(pwd))
+    [ -n "$TMUX" ] && tmux rename-window "$(basename $(pwd))"
 }
 
 

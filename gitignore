@@ -30,6 +30,7 @@ vendor/bundler_gems
 ### Vim
 *.sw[nop]
 Session.vim
+.previous.vim
 vim/.netrwhist
 vim/plugged
 
