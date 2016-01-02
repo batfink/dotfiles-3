@@ -117,7 +117,7 @@ export PATH=$PATH:$GOPATH/bin
 if [[ -s $HOME/.zprofile ]]; then
     source $HOME/.zprofile
 else
-    [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh
+    [[ -s $HOME/.nvm/nvm.sh ]] && bash $HOME/.nvm/nvm.sh
 fi
 
 # Clean up path

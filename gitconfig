@@ -5,12 +5,12 @@
 	default = upstream
 [color]
 	ui = auto
-; [init]
-;   templatedir = ~/.git_template
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
 	autocrlf = input
+[fetch]
+	prune = true
 [merge]
 	tool = vimdiff
 [diff]
@@ -29,8 +29,6 @@
 	clean = git hawser clean %f
 	smudge = git hawser smudge %f
 	required = true
-[fetch]
-	prune = true
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f

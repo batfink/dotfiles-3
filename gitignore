@@ -34,6 +34,10 @@ Session.vim
 vim/.netrwhist
 vim/plugged
 
+### Custom ignores
+.agignore
+__IGNORE__
+
 ### Local Dev Files
 .env*
 !.env.public

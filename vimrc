@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'digitaltoad/vim-jade'
+" Plug 'flowtype/vim-flow'
 Plug 'garbas/vim-snipmate'
 Plug 'geekjuice/vim-mocha'
 Plug 'geekjuice/vim-picoline'
@@ -25,6 +26,7 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
+Plug 'lambdatoast/elm.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mtscout6/vim-cjsx'
 Plug 'mxw/vim-jsx'
@@ -97,13 +99,9 @@ noremap <leader>4 :set ai et ts=4 sts=4 sw=4<cr>:echo "Tabs: 4"<cr>
 " Commands
 nnoremap <leader>r @:
 
-" Bracket jump
-nnoremap <leader><tab> %
-vnoremap <leader><tab> %
-
 " Move Visual Blocks
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Increment/Decrement
 nnoremap <C-i> <C-a>
@@ -186,6 +184,7 @@ set synmaxcol=120                       "prevent syntax on long lines
 set t_ut=                               "screen refresh issue with Tmux
 set ttyfast                             "faster screen refresh(?)
 set updatetime=3600                     "update time
+set textwidth=100                       "Text width 100 for formatting
 
 " Tmp file settings
 set noswapfile
@@ -227,7 +226,7 @@ set guitablabel=%t
 "======================================
 let g:picoline_color = "default"        "Default colorscheme
 let g:picoline_ctrlp = 1                "Use picoline theme for ctrlp
-let g:picoline_limit = 80               "Color change on > 80 columns
+let g:picoline_limit = 100              "Color change on > 100 columns
 let g:picoline_trunc = 0                "Truncate cols > 100
 let g:picoline_nchar = 1                "Show cursor number (not char count)
 let g:picoline_color = 1                "Colored modes
@@ -339,7 +338,9 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_wq = 0
-let g:syntastic_ignore_files = ['\.min\.']
+let g:syntastic_enable_highlighting = 1
+let g:syntastic_ignore_files = ['\.min\.', '\.html$']
+let g:syntastic_css_checkers = ['stylelint']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 let g:syntastic_java_checkers = ['checkstyle']
@@ -350,17 +351,18 @@ let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_style_warning_symbol = "⚠"
 
 " Bindings
-nnoremap <leader>et :SyntasticToggleMode<cr>
-nnoremap <leader>ec :SyntasticCheck<cr>
-nnoremap <leader>er :SyntasticReset<cr>
-nnoremap <leader>el :Errors<cr>
+nnoremap <leader>st :SyntasticToggleMode<cr>
+nnoremap <leader>sc :SyntasticCheck<cr>
+nnoremap <leader>sr :SyntasticReset<cr>
+nnoremap <leader>sl :Errors<cr>
 
 
 "======================================
 "   NERD{TREE|COMMENTER}
 "======================================
-let NERDTreeQuitOnOpen = 1              "Closes NerdTree after open file
-let NERDSpaceDelims = 1                 "Adds space between comments
+let NERDTreeIgnore=['node_modules[[dir]]']  "Adds space between comments
+let NERDTreeQuitOnOpen = 1                  "Closes NerdTree after open file
+let NERDSpaceDelims = 1                     "Adds space between comments
 
 " NERDtree toggle
 nnoremap <leader>o :NERDTreeToggle<CR><c-w>=
@@ -421,7 +423,7 @@ nnoremap <leader>// :JsDoc<cr>
 let g:jsdoc_default_mapping = 0
 let g:jsdoc_allow_input_prompt = 0
 let g:jsdoc_underscore_private = 0
-let g:jsdoc_allow_shorthand = 1
+let g:jsdoc_enable_es6 = 1
 
 
 "======================================
@@ -491,6 +493,18 @@ nnoremap gst :Gstatus<CR>
 
 
 "======================================
+"   FLOW
+"======================================
+" nnoremap <leader>fm :FlowMake<CR>
+" nnoremap <leader>ft :FlowType<CR>
+
+" let g:flow#autoclose = 1
+" let g:flow#enable = 1
+" let g:flow#errjmp = 0
+" let g:flow#omnifunc = 1
+
+
+"======================================
 "   SYNTAX/FILETYPE/HIGHLIGHT
 "======================================
 " Auto save last session on close
@@ -510,6 +524,7 @@ autocmd Filetype yaml setlocal ai ts=2 sts=2 et sw=2
 " Shell
 autocmd Filetype conf setlocal syntax=sh
 autocmd Filetype conf,sh,zsh setlocal ai ts=4 sts=4 et sw=4
+autocmd BufRead,BufNewFile .env* setlocal filetype=sh
 
 " HTML/Jade
 autocmd BufRead,BufNewFile *.handlebars setlocal filetype=html
