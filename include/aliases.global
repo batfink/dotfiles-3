@@ -4,7 +4,7 @@
 # Edits
 alias gal="vim $INCLUDE/aliases.global"
 alias fn="vim $INCLUDE/functions"
-alias vr="vim $DOT/vimrc"
+alias ve="vim $DOT/vimrc"
 alias tme="vim $DOT/tmux.conf"
 alias edithosts="vim /etc/hosts"
 alias editpaths="vim /etc/paths"

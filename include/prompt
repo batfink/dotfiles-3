@@ -38,13 +38,14 @@ minimal_prompt1() {
     echo "%{$fg[black]%}{ $(minimal_pwd)$(minimal_git) %{$fg[black]%}}"
 }
 minimal_prompt2() {
-    echo "%{$fg[white]%}\u3bb %{$fg[black]%}\ubb%{$reset_color%} "
+    local NORMAL_MODE="%{$fg[yellow]%}\u3bb%{$reset_color%}"
+    local INSERT_MODE="%{$fg[white]%}\u3bb%{$reset_color%}"
+    local MODE_INDICATOR="${${KEYMAP/vicmd/$NORMAL_MODE}/(main|viins)/$INSERT_MODE}"
+    echo "$MODE_INDICATOR %{$fg[black]%}\ubb%{$reset_color%} "
 }
 multiline_prompt() {
     echo "%{$fg[red]%} »%{$reset_color%} "
 }
-
-
 
 ##########################################
 # AUTORUN COMMANDS
@@ -57,12 +58,6 @@ tmux_pane_pwd() {
 ##########################################
 # PROMPT
 ##########################################
-# local STATUS="%(?:%{$fg[green]%}:%{$fg[red]%}%s)"
-# PROMPT=$'$(tmux_pane_pwd)\n$(whoami)$(collapse_pwd)$(git_info)
-# ${STATUS}$(prompt_char) '
-# PROMPT2='$(multiline_prompt)'
-# RPROMPT='$(node_version)'
-
 PROMPT=$'$(tmux_pane_pwd)\n$(minimal_prompt1)
 $(minimal_prompt2)'
 PROMPT2='$(multiline_prompt)'

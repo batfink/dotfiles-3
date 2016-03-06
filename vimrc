@@ -303,11 +303,9 @@ nnoremap <leader>tm :call VimMochaToggleTmux()<cr>
 func! VimMochaToggleTmux()
   if g:vim_mocha_use_tmux
     let g:vim_mocha_use_tmux = 0
-    let g:mocha_js_command = '!cortado {spec}'
     echo "[vim-mocha] Not using tmux"
   else
     let g:vim_mocha_use_tmux = 1
-    let g:mocha_js_command = 'call Send_to_Tmux("cortado {spec}\n")'
     echo "[vim-mocha] Using tmux"
   endif
 endfunction
@@ -363,6 +361,7 @@ nnoremap <leader>sl :Errors<cr>
 let NERDTreeIgnore=['node_modules[[dir]]']  "Adds space between comments
 let NERDTreeQuitOnOpen = 1                  "Closes NerdTree after open file
 let NERDSpaceDelims = 1                     "Adds space between comments
+let NERDTreeShowHidden = 1                  "Show hidden files
 
 " NERDtree toggle
 nnoremap <leader>o :NERDTreeToggle<CR><c-w>=

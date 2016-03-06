@@ -44,12 +44,11 @@ linker() {
 
 # Directories
 dir=$(dirname $(script_location))  # dotfiles directory
-ohmyplugs=$HOME/.oh-my-zsh/custom/plugins
 unisondir=$HOME/.unison
 muttdir=$HOME/.mutt
 
 # Handpicked Files
-files=(agignore coffeelintrc eslintrc gemrc ghci gitconfig gitignore git_template hushlogin htoprc muttrc rspec tmux.conf vimrc vim zprofile zshrc)
+files=(agignore coffeelintrc eslintrc ghci gitconfig gitignore hushlogin htoprc muttrc tmux.conf vimrc vim zlogin zprofile zshenv zshrc)
 [[ "$SHELL" = *bash* ]] && files+=(profile)
 
 # OS Message

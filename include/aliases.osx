@@ -7,20 +7,13 @@ alias ls="ls -G"
 alias ll="ls -GAl"
 alias rm="rm -i"
 alias rsi="sips -Z"
-alias ss="open -jg $APP/Subsonic.app"
-alias julia="$APP/Julia.app/Contents/Resources/julia/bin/julia"
 alias b2d='unison cloud'
 alias d2d='unison dev'
 alias ag="ag --smart-case"
 
 # DIR
-alias drives="cd /Volumes"
-alias desk="cd /Users/Geekjuice/Desktop"
+alias desk="cd $HOME/Desktop"
 alias dls="cd $HOME/Downloads"
-alias tdl="cd $HOME/Torrent\ Downloads"
-alias drv="cd $DRIVE"
-alias box="cd $DROPBOX"
-alias code="cd $DROPBOX/Coding"
 
 # Homebrew
 alias bud="brew update && brew outdated"

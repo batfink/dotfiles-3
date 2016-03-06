@@ -6,7 +6,6 @@ alias gh="GITHUB_HOST=github.com git"
 
 # Commands
 git() { hub $@ } # Fixed autocomplete issue
-alias g="git"
 alias gaa="git add -A && git status -s"
 alias gau="git add -u && git status -s"
 alias gci="git commit -v"
@@ -16,10 +15,8 @@ alias gdb="git branch -d"
 alias guu="git branch --unset-upstream"
 alias gco="git checkout"
 alias gcb="git checkout -b"
+alias grb="git rebase"
 alias gri="git rebase -i"
-alias grc="git rebase --continue"
-alias gra="git rebase --abort"
-alias gmr="git merge"
 alias gst="git status"
 alias gss="git status -s"
 alias grm="git remote"
@@ -30,7 +27,7 @@ alias gpl="git pull --rebase"
 alias gdt="git difftool"
 alias gdc="git difftool --cached"
 alias gmt="git mergetool"
-alias grf="git reflog"
+alias grl="git reflog"
 alias gus="git reset HEAD"
 alias guc="git reset --soft HEAD^"
 alias gpr="git pull-request"
@@ -41,13 +38,6 @@ alias gopen="git browse"
 
 # Suffix alias
 alias -g NP="--no-prompt"
-
-# GIT SUBMODULE ALIAS
-alias gsi="git submodule init"
-alias gsa="git submodule add"
-alias gsu="git submodule update"
-alias gml="grep path .gitmodules | sed -E 's/^.*\/(.+)$/\1/' | sort"
-alias gmll="grep path .gitmodules | sed 's/.*= //'"
 
 # Delete merged branchs
 gdm() {

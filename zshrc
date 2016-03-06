@@ -3,6 +3,7 @@
 ##########################################
 DOT=$HOME/.dotfiles
 
+
 ##########################################
 # ANTIGEN
 ##########################################
@@ -10,52 +11,26 @@ source $HOME/.antigen/antigen.zsh
 
 antigen use oh-my-zsh
 antigen bundle git
-antigen bundle battery
-antigen bundle bower
-antigen bundle brew
-antigen bundle node
-antigen bundle npm
-antigen bundle nvm
-antigen bundle tmux
+antigen bundle supercrabtree/k
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search
 antigen apply
 
-##########################################
-# OH-MY-ZSH SETUP
-##########################################
-# Disable auto title names
-DISABLE_AUTO_TITLE=true
-
-# Display red dots while waiting for completion
-COMPLETION_WAITING_DOTS="true"
 
 ##########################################
 # ZSH SETTINGS
 ##########################################
-# Vi mode
-bindkey -v
-bindkey "^F" vi-cmd-mode
-bindkey jj vi-cmd-mode
+# Disable auto update
+DISABLE_AUTO_UPDATE="true"
 
-# Edit command in editor
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
+# Disable auto title names
+DISABLE_AUTO_TITLE="true"
 
-# Use incremental search
-bindkey "^R" history-incremental-search-backward
+# Display red dots while waiting for completion
+COMPLETION_WAITING_DOTS="true"
 
-# Use substring search
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-
-# Handy keybindings
-bindkey "^P" history-search-backward
-bindkey "^Y" accept-and-hold
-bindkey "^N" insert-last-word
-bindkey -s "^S" "^[Isudo ^[A" # "s" for "sudo"
-bindkey -s "^Y" "^[Itx ^[A"   # "t" for "tmux/transmit"
+# Vim mode
+[ -e "$DOT/plugins/vim.plugin.zsh" ] && source "$DOT/plugins/vim.plugin.zsh"
 
 # Expand functions in the prompt
 setopt prompt_subst
@@ -78,7 +53,7 @@ setopt EXTENDED_GLOB
 
 
 ##########################################
-# INCLUDE
+# ALIASES
 ##########################################
 [ -e "$DOT/aliases" ] && source "$DOT/aliases"
 
@@ -86,7 +61,7 @@ setopt EXTENDED_GLOB
 ##########################################
 # ZSH ALIAS
 ##########################################
-alias zr="vim $DOT/zshrc"
+alias ze="vim $DOT/zshrc"
 alias rf='unalias -m "*" && source ~/.zshrc'
 
 
@@ -97,17 +72,14 @@ alias rf='unalias -m "*" && source ~/.zshrc'
 
 
 ##########################################
-# RBENV, JENV, CABAL, NVM, & CLEANUP PATH
+# PATH
 ##########################################
+# Executables
+export PATH=$DOT/bin:$PATH
+
 # Haskell/Cabal
-export PATH=$HOME/Library/Haskell/bin:$DOT/bin:$HOME/.rbenv/bin:$PATH
-
-# Java
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
-
-# Rbenv
-eval "$(rbenv init -)"
+export HASKELLPATH=$HOME/Library/Haskell
+export PATH=$HASKELLPATH/bin:$PATH
 
 # Go
 export GOPATH=$HOME/.go
@@ -130,7 +102,9 @@ fi
 if command -v brew >/dev/null 2>&1; then
     export _Z_DATA="/tmp/.z"
     touch /tmp/.z
-    [ -f $(brew --prefix)/etc/profile.d/z.sh ] && source $(brew --prefix)/etc/profile.d/z.sh
+    if [ -f $(brew --prefix)/etc/profile.d/z.sh ]; then
+        source $(brew --prefix)/etc/profile.d/z.sh
+    fi
 fi
 
 
