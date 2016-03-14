@@ -48,9 +48,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-Plug '~/.vim/plugged/proselint'
-
 " Plug 'flowtype/vim-flow'
+" Plug '~/.vim/plugged/proselint'
 
 call plug#end()
 
@@ -345,8 +344,8 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 let g:syntastic_java_checkers = ['checkstyle']
 let g:syntastic_coffee_coffeelint_args = '--file ~/.coffeelintrc'
-let g:syntastic_markdown_checkers = ['proselint']
-let g:syntastic_text_checkers = ['proselint']
+" let g:syntastic_markdown_checkers = ['proselint']
+" let g:syntastic_text_checkers = ['proselint']
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_style_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
