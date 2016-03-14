@@ -12,7 +12,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'digitaltoad/vim-jade'
-" Plug 'flowtype/vim-flow'
 Plug 'garbas/vim-snipmate'
 Plug 'geekjuice/vim-mocha'
 Plug 'geekjuice/vim-picoline'
@@ -26,9 +25,8 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
-Plug 'lambdatoast/elm.vim'
+Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'mtscout6/vim-cjsx'
 Plug 'mxw/vim-jsx'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
@@ -49,6 +47,10 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+
+Plug '~/.vim/plugged/proselint'
+
+" Plug 'flowtype/vim-flow'
 
 call plug#end()
 
@@ -343,6 +345,8 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 let g:syntastic_java_checkers = ['checkstyle']
 let g:syntastic_coffee_coffeelint_args = '--file ~/.coffeelintrc'
+let g:syntastic_markdown_checkers = ['proselint']
+let g:syntastic_text_checkers = ['proselint']
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_style_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
@@ -360,8 +364,8 @@ nnoremap <leader>sl :Errors<cr>
 "======================================
 let NERDTreeIgnore=['node_modules[[dir]]']  "Adds space between comments
 let NERDTreeQuitOnOpen = 1                  "Closes NerdTree after open file
-let NERDSpaceDelims = 1                     "Adds space between comments
 let NERDTreeShowHidden = 1                  "Show hidden files
+let NERDSpaceDelims = 1                     "Adds space between comments
 
 " NERDtree toggle
 nnoremap <leader>o :NERDTreeToggle<CR><c-w>=
