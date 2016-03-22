@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'digitaltoad/vim-jade'
+Plug 'flowtype/vim-flow'
 Plug 'garbas/vim-snipmate'
 Plug 'geekjuice/vim-mocha'
 Plug 'geekjuice/vim-picoline'
@@ -25,7 +26,7 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
-Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
+Plug 'lambdatoast/elm.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mxw/vim-jsx'
 Plug 'othree/html5.vim'
@@ -47,9 +48,6 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-
-" Plug 'flowtype/vim-flow'
-" Plug '~/.vim/plugged/proselint'
 
 call plug#end()
 
@@ -340,12 +338,10 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_ignore_files = ['\.min\.', '\.html$']
 let g:syntastic_css_checkers = ['stylelint']
-let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['eslint', 'flow']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 let g:syntastic_java_checkers = ['checkstyle']
 let g:syntastic_coffee_coffeelint_args = '--file ~/.coffeelintrc'
-" let g:syntastic_markdown_checkers = ['proselint']
-" let g:syntastic_text_checkers = ['proselint']
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_style_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
@@ -497,13 +493,14 @@ nnoremap gst :Gstatus<CR>
 "======================================
 "   FLOW
 "======================================
-" nnoremap <leader>fm :FlowMake<CR>
-" nnoremap <leader>ft :FlowType<CR>
+nnoremap <leader>fm :FlowMake<CR>
+nnoremap <leader>ft :FlowType<CR>
 
-" let g:flow#autoclose = 1
-" let g:flow#enable = 1
-" let g:flow#errjmp = 0
-" let g:flow#omnifunc = 1
+let g:flow#autoclose = 1
+let g:flow#enable = 0
+let g:flow#errjmp = 0
+let g:flow#omnifunc = 1
+let g:flow#qfsize = 0
 
 
 "======================================

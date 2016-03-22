@@ -33,19 +33,14 @@ alias rf="unalias -a && source $HOME/.profile"
 alias path="echo $PATH | tr ':' '\n'"
 alias ghi="ghci 2>&1 | HsColour -tty"
 
-
-# JS/Coffee
-alias cf="coffee"
-alias gp="gulp"
-alias nd="node"
-alias bw="bower"
-alias cfl="coffeelint -q -f ~/.coffeelintrc **/*.coffee"
-
-# NPM
+# Node/NPM
 alias nod="npm outdated --depth=0"
 alias nup="npm up"
 alias nls="npmlist"
 alias hi="hicat"
+alias nodepkgs="nvm current > $DOT/nodepkgs; npmlist | cat >> $DOT/nodepkgs"
+
+# Musigmachi
 alias itunes="musigmachi iTunes"
 alias rdio="musigmachi Rdio"
 alias spotify="musigmachi Spotify"

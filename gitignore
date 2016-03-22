@@ -47,8 +47,9 @@ todo.md
 node_modules
 npm-debug.log
 
-### Java Console
+### Java
 JavaConsole.java
+.local.properties
 
 ### I18n
 **/*all_langs.txt
