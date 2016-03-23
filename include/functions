@@ -18,8 +18,18 @@ vls() {
 upgrade_nvm() {
     if [[ -d $NVM_DIR ]]; then
         cd $NVM_DIR
-        local UPDATED="*"
         git pull origin master
+        cd - &>/dev/null
+    fi
+}
+
+# Update TPM
+upgrade_tpm() {
+    local TPM_DIR="$HOME/.tmux/plugins/tpm"
+    if [[ -d $TPM_DIR ]]; then
+        cd $TPM_DIR
+        git pull origin master
+        cd - &>/dev/null
     fi
 }
 
