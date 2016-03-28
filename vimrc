@@ -179,7 +179,7 @@ set scrolloff=999                       "keep cursor at the center
 set showcmd                             "display incomplete commands
 set showmatch                           "jump to first match
 set smartcase                           "search uppercase if given
-set synmaxcol=120                       "prevent syntax on long lines
+set synmaxcol=100                       "prevent syntax on long lines
 set t_ut=                               "screen refresh issue with Tmux
 set ttyfast                             "faster screen refresh(?)
 set updatetime=3600                     "update time
@@ -513,7 +513,7 @@ execute "autocmd VimLeavePre * mksession! " . g:vimtmp . "previous.vim"
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
 " Markdown
-autocmd BufRead,BufNewFile *.md setlocal spell textwidth=80 filetype=markdown
+autocmd BufRead,BufNewFile *.md setlocal spell textwidth=100 filetype=markdown
 autocmd Filetype markdown setlocal ai ts=4 sts=4 et sw=4
 
 " YAML
