@@ -1,3 +1,3 @@
 {
-  "extends": "hubspot"
+  "extends": "geekjuice/esnext"
 }
