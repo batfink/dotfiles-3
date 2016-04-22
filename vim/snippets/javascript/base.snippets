@@ -12,6 +12,9 @@ snippet header
 	 *
 	 * @module $0
 	 */
+# Import
+snippet import
+	import ${1:foo} from '${2:bar}';
 # Export default
 snippet export
 	export default {
@@ -25,3 +28,8 @@ snippet section
 # ESLint lgnore line
 snippet ignore
 	// eslint-disable-line
+# Arrow Function
+snippet =>
+	(${1}) => {
+		${2}
+	}

@@ -338,7 +338,8 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_ignore_files = ['\.min\.', '\.html$']
 let g:syntastic_css_checkers = ['stylelint']
-let g:syntastic_javascript_checkers = ['eslint', 'flow']
+let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_checkers = ['flow']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 let g:syntastic_java_checkers = ['checkstyle']
 let g:syntastic_coffee_coffeelint_args = '--file ~/.coffeelintrc'
@@ -458,6 +459,8 @@ let g:fzf_action = {
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
 let g:fzf_layout = { 'down': '20%' }
+
+nnoremap <C-f> :Files<space>
 
 
 "======================================
