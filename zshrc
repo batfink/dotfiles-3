@@ -78,8 +78,7 @@ alias rf='unalias -m "*" && source ~/.zshrc'
 export PATH=$DOT/bin:$PATH
 
 # Haskell/Cabal
-export HASKELLPATH=$HOME/Library/Haskell
-export PATH=$HASKELLPATH/bin:$PATH
+export PATH=$PATH:$HOME/.local/bin
 
 # Go
 export GOPATH=$HOME/.go

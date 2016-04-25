@@ -12,16 +12,19 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'digitaltoad/vim-jade'
-Plug 'flowtype/vim-flow'
+Plug 'eagletmt/ghcmod-vim'
+Plug 'ervandew/supertab'
 Plug 'garbas/vim-snipmate'
 Plug 'geekjuice/vim-mocha'
 Plug 'geekjuice/vim-picoline'
+Plug 'godlygeek/tabular'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'henrik/vim-qargs'
 Plug 'jgdavey/tslime.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'junegunn/gv.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
 Plug 'kchmck/vim-coffee-script'
@@ -36,6 +39,7 @@ Plug 'ryanss/vim-hackernews'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tomtom/tlib_vim'
 Plug 'Townk/vim-autoclose'
@@ -251,22 +255,6 @@ let g:ctrlp_working_path_mode = 0       "Don't set local dir on every invoke
 
 
 "======================================
-"   TAB COMPLETION
-"======================================
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
-set wildmode=list:longest,list:full
-set complete=.,w,t
-func! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-
-
-"======================================
 "   THE SILVER SEARCHER
 "======================================
 if executable('ag')
@@ -339,7 +327,6 @@ let g:syntastic_enable_highlighting = 1
 let g:syntastic_ignore_files = ['\.min\.', '\.html$']
 let g:syntastic_css_checkers = ['stylelint']
 let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_javascript_checkers = ['flow']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 let g:syntastic_java_checkers = ['checkstyle']
 let g:syntastic_coffee_coffeelint_args = '--file ~/.coffeelintrc'
@@ -494,16 +481,46 @@ nnoremap gst :Gstatus<CR>
 
 
 "======================================
-"   FLOW
+"   HASKELL
 "======================================
-nnoremap <leader>fm :FlowMake<CR>
-nnoremap <leader>ft :FlowType<CR>
+nnoremap <leader>ti :GhcModTypeInsert<CR>
+nnoremap <leader>ts :GhcModSplitFunCase<CR>
+nnoremap <leader>tt :GhcModType<CR>
+nnoremap <leader>tc :GhcModTypeClear<CR>
+nnoremap <leader>tl :call HaskellLoadFile()<CR>
+nnoremap <leader>tw :call HaskellToggleWatch()<CR>
 
-let g:flow#autoclose = 1
-let g:flow#enable = 0
-let g:flow#errjmp = 0
-let g:flow#omnifunc = 1
-let g:flow#qfsize = 0
+function! HaskellLoadFile()
+  execute "Tmux :load " . expand("%")
+endfunction
+
+let g:HaskellWatchingFiles = 0
+function! HaskellToggleWatch(...)
+  if g:HaskellWatchingFiles
+    let g:HaskellWatchingFiles = 0
+    echo "[Haskell] Unwatching files..."
+  else
+    let g:HaskellWatchingFiles = 1
+    echo "[Haskell] Watching files..."
+  endif
+endfunction
+
+function! HaskellWatchAndLoad()
+  if &ft == "haskell"
+    if g:HaskellWatchingFiles
+      call HaskellLoadFile()
+    endif
+  endif
+endfunction
+
+autocmd BufWritePost * call HaskellWatchAndLoad()
+
+
+"======================================
+"   Tabular
+"======================================
+nnoremap <leader>a :Tabularize /
+vnoremap <leader>a :Tabularize /
 
 
 "======================================
@@ -542,9 +559,11 @@ autocmd BufRead,BufNewFile Gemfile* setlocal filetype=ruby
 autocmd Filetype json nnoremap <leader>j :%!jq .<cr>
 
 " Goyo + Limelight
-" autocmd User GoyoEnter Limelight
-" autocmd User GoyoLeave Limelight!
+autocmd User GoyoEnter Limelight
+autocmd User GoyoLeave Limelight!
 
+" Haskell
+autocmd Filetype haskell setlocal ai ts=8 sts=8 et sw=8
 
 " Set color depending on terminal color support
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"

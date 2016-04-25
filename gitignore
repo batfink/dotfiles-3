@@ -7,25 +7,13 @@
 #
 
 ### General
-.DS_Store
 *~
 .secret
+.DS_Store
 
 ### IntelliJ
 *.iml
 .idea
-
-### Ruby/Rails
-.bundle
-.sass-cache/
-db/*.sqlite3
-log/*.log
-rerun.txt
-tags
-tmp/**/*
-!tmp/cache/.keep
-vendor/bundler_gems
-.rspec
 
 ### Vim
 *.sw[nop]
@@ -50,6 +38,9 @@ npm-debug.log
 ### Java
 JavaConsole.java
 .local.properties
+
+### Haskell
+.stack-work
 
 ### I18n
 **/*all_langs.txt
