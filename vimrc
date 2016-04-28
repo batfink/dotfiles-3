@@ -13,11 +13,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'digitaltoad/vim-jade'
 Plug 'eagletmt/ghcmod-vim'
-Plug 'ervandew/supertab'
 Plug 'garbas/vim-snipmate'
+Plug 'ervandew/supertab'
 Plug 'geekjuice/vim-mocha'
 Plug 'geekjuice/vim-picoline'
-Plug 'godlygeek/tabular'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'henrik/vim-qargs'
 Plug 'jgdavey/tslime.vim'
@@ -48,6 +47,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-haml'
+Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -107,8 +107,8 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Increment/Decrement
-nnoremap <C-i> <C-a>
-nnoremap <C-x> <C-x>
+nnoremap + <C-a>
+nnoremap - <C-x>
 
 " Folding
 nnoremap <leader><leader> za
@@ -453,14 +453,19 @@ nnoremap <C-f> :Files<space>
 "======================================
 "   SNIPMATE
 "======================================
+imap <C-m> <cr><Plug>snipMateTrigger
 imap <C-j> <Plug>snipMateNextOrTrigger
-smap <C-j> <Plug>snipMateNextOrTrigger
 imap <C-k> <Plug>snipMateBack
-smap <C-k> <Plug>snipMateBack
-vmap <C-v> <Plug>snipMateVisual
+imap <C-r> <Plug>snipMateShow
 
 let g:snipMate = {}
 let g:snipMate.snippet_version = 1
+
+
+"======================================
+"   SUPERTAB
+"======================================
+let g:SuperTabCrMapping = 1
 
 
 "======================================
@@ -481,6 +486,12 @@ nnoremap gst :Gstatus<CR>
 
 
 "======================================
+"   MARKDOWN
+"======================================
+let g:markdown_fenced_languages = ['json', 'javascript', 'sh']
+
+
+"======================================
 "   HASKELL
 "======================================
 nnoremap <leader>ti :GhcModTypeInsert<CR>
@@ -496,12 +507,14 @@ endfunction
 
 let g:HaskellWatchingFiles = 0
 function! HaskellToggleWatch(...)
-  if g:HaskellWatchingFiles
-    let g:HaskellWatchingFiles = 0
-    echo "[Haskell] Unwatching files..."
-  else
-    let g:HaskellWatchingFiles = 1
-    echo "[Haskell] Watching files..."
+  if &ft == 'haskell'
+    if g:HaskellWatchingFiles
+      let g:HaskellWatchingFiles = 0
+      echo "[Haskell] Unwatching files..."
+    else
+      let g:HaskellWatchingFiles = 1
+      echo "[Haskell] Watching files..."
+    endif
   endif
 endfunction
 
@@ -514,13 +527,6 @@ function! HaskellWatchAndLoad()
 endfunction
 
 autocmd BufWritePost * call HaskellWatchAndLoad()
-
-
-"======================================
-"   Tabular
-"======================================
-nnoremap <leader>a :Tabularize /
-vnoremap <leader>a :Tabularize /
 
 
 "======================================
