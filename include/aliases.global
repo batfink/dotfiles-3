@@ -34,8 +34,9 @@ alias path="echo $PATH | tr ':' '\n'"
 alias ghi="ghci 2>&1 | HsColour -tty"
 
 # Node/NPM
-alias nod="npm outdated --depth=0"
 alias nup="npm up"
+alias nod!="npm outdated -g | grep -v 'linked' | tail -n+2 | cut -d ' ' -f 1 | tr '\n' ' '"
+alias nod="npm outdated --depth=0"
 alias nls="npmlist"
 alias hi="hicat"
 alias nodepkgs="nvm current > $DOT/nodepkgs; npmlist | cat >> $DOT/nodepkgs"
