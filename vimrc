@@ -13,13 +13,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'digitaltoad/vim-jade'
 Plug 'eagletmt/ghcmod-vim'
+Plug 'fatih/vim-go'
 Plug 'garbas/vim-snipmate'
 Plug 'ervandew/supertab'
-Plug 'geekjuice/vim-mocha'
 Plug 'geekjuice/vim-picoline'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'henrik/vim-qargs'
 Plug 'jgdavey/tslime.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
@@ -34,7 +35,6 @@ Plug 'mxw/vim-jsx'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'rking/ag.vim'
-Plug 'ryanss/vim-hackernews'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
@@ -269,6 +269,7 @@ let g:ag_prg = 'ag --column -S'
 " Search mappings
 nnoremap K :Ag "\b<C-R><C-W>\b"<CR>
 nnoremap \ :Ag<space>
+nnoremap \| :Ag %:t:r<cr>
 
 " NOTE/TODO Search
 nnoremap <leader>\ :Ag "NOTE\|TODO\|DEBUG"<CR>
@@ -279,29 +280,6 @@ nnoremap <leader>\ :Ag "NOTE\|TODO\|DEBUG"<CR>
 "======================================
 nmap <leader>rs <Plug>SetTmuxVars
 nnoremap <leader>: :Tmux<space>
-
-
-"======================================
-"   VIM-MOCHA
-"======================================
-let g:vim_mocha_use_tmux = 0
-nnoremap <leader>tm :call VimMochaToggleTmux()<cr>
-
-func! VimMochaToggleTmux()
-  if g:vim_mocha_use_tmux
-    let g:vim_mocha_use_tmux = 0
-    echo "[vim-mocha] Not using tmux"
-  else
-    let g:vim_mocha_use_tmux = 1
-    echo "[vim-mocha] Using tmux"
-  endif
-endfunction
-
-" Vim-spec mappings
-nnoremap <leader>ta :call RunAllSpecs()<cr>
-nnoremap <leader>tt :call RunCurrentSpecFile()<cr>
-nnoremap <leader>ts :call RunNearestSpec()<cr>
-nnoremap <leader>tl :call RunLastSpec()<cr>
 
 
 "======================================
@@ -453,7 +431,6 @@ nnoremap <C-f> :Files<space>
 "======================================
 "   SNIPMATE
 "======================================
-imap <C-m> <cr><Plug>snipMateTrigger
 imap <C-j> <Plug>snipMateNextOrTrigger
 imap <C-k> <Plug>snipMateBack
 imap <C-r> <Plug>snipMateShow
@@ -463,9 +440,10 @@ let g:snipMate.snippet_version = 1
 
 
 "======================================
-"   SUPERTAB
+"   EASY-ALIGN
 "======================================
-let g:SuperTabCrMapping = 1
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 
 "======================================
@@ -475,14 +453,6 @@ nnoremap msp :Dispatch! musigmachi spotify play<CR>
 nnoremap mss :Dispatch! musigmachi spotify pause<CR>
 nnoremap ms. :Dispatch! musigmachi spotify next<CR>
 nnoremap ms, :Dispatch! musigmachi spotify prev<CR>
-
-
-"======================================
-"   FUGITIVE
-"======================================
-nnoremap gaa :silent! Git add . \| redraw!<CR>
-nnoremap gac :silent! Git add . \| redraw! \| Gcommit<CR>
-nnoremap gst :Gstatus<CR>
 
 
 "======================================

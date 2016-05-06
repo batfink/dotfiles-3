@@ -82,7 +82,7 @@ export PATH=$PATH:$HOME/.local/bin
 
 # Go
 export GOPATH=$HOME/.go
-export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOPATH:$GOPATH/bin
 
 # Nvm
 if [[ -s $HOME/.zprofile ]]; then
