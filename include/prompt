@@ -48,16 +48,7 @@ multiline_prompt() {
 }
 
 ##########################################
-# AUTORUN COMMANDS
-##########################################
-tmux_pane_pwd() {
-    [ -n "$TMUX" ] && tmux rename-window "$(basename $(pwd))"
-}
-
-
-##########################################
 # PROMPT
 ##########################################
-PROMPT=$'$(tmux_pane_pwd)\n$(minimal_prompt1)
-$(minimal_prompt2)'
+PROMPT=$'\n$(minimal_prompt1)\n$(minimal_prompt2)'
 PROMPT2='$(multiline_prompt)'

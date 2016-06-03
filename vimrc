@@ -15,7 +15,6 @@ Plug 'digitaltoad/vim-jade'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'fatih/vim-go'
 Plug 'garbas/vim-snipmate'
-Plug 'ervandew/supertab'
 Plug 'geekjuice/vim-picoline'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'henrik/vim-qargs'
@@ -255,6 +254,22 @@ let g:ctrlp_working_path_mode = 0       "Don't set local dir on every invoke
 
 
 "======================================
+"   TAB COMPLETION
+"======================================
+inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+set wildmode=list:longest,list:full
+set complete=.,w,t
+func! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+
+
+"======================================
 "   THE SILVER SEARCHER
 "======================================
 if executable('ag')
@@ -323,7 +338,7 @@ nnoremap <leader>sl :Errors<cr>
 "======================================
 "   NERD{TREE|COMMENTER}
 "======================================
-let NERDTreeIgnore=['node_modules[[dir]]']  "Adds space between comments
+" let NERDTreeIgnore=['node_modules[[dir]]']  "Adds space between comments
 let NERDTreeQuitOnOpen = 1                  "Closes NerdTree after open file
 let NERDTreeShowHidden = 1                  "Show hidden files
 let NERDSpaceDelims = 1                     "Adds space between comments
