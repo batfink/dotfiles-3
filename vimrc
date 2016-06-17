@@ -312,6 +312,7 @@ nnoremap <leader>g :GitGutterLineHighlightsToggle<cr>
 "======================================
 "   SYNTASTIC
 "======================================
+let g:syntastic_debug = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
@@ -321,6 +322,7 @@ let g:syntastic_ignore_files = ['\.min\.', '\.html$']
 let g:syntastic_css_checkers = ['stylelint']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
+let g:syntastic_javascript_eslint_args = '--parser=babel-eslint'
 let g:syntastic_java_checkers = ['checkstyle']
 let g:syntastic_coffee_coffeelint_args = '--file ~/.coffeelintrc'
 let g:syntastic_error_symbol = "✗"
@@ -338,7 +340,7 @@ nnoremap <leader>sl :Errors<cr>
 "======================================
 "   NERD{TREE|COMMENTER}
 "======================================
-" let NERDTreeIgnore=['node_modules[[dir]]']  "Adds space between comments
+let NERDTreeIgnore=['node_modules[[dir]]']  "Adds space between comments
 let NERDTreeQuitOnOpen = 1                  "Closes NerdTree after open file
 let NERDTreeShowHidden = 1                  "Show hidden files
 let NERDSpaceDelims = 1                     "Adds space between comments
@@ -554,7 +556,7 @@ autocmd User GoyoEnter Limelight
 autocmd User GoyoLeave Limelight!
 
 " Haskell
-autocmd Filetype haskell setlocal ai ts=8 sts=8 et sw=8
+autocmd Filetype haskell setlocal ai ts=2 sts=2 et sw=2
 
 " Set color depending on terminal color support
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
