@@ -30,10 +30,10 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
 Plug 'lambdatoast/elm.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'mileszs/ack.vim'
 Plug 'mxw/vim-jsx'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
@@ -273,21 +273,20 @@ endfunction
 "   THE SILVER SEARCHER
 "======================================
 if executable('ag')
+  let g:ackprg = 'ag --vimgrep --smart-case'
 " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
 " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-let g:ag_prg = 'ag --column -S'
-
 " Search mappings
-nnoremap K :Ag "\b<C-R><C-W>\b"<CR>
-nnoremap \ :Ag<space>
-nnoremap \| :Ag %:t:r<cr>
+nnoremap K :Ack "\b<C-R><C-W>\b"<CR>
+nnoremap \ :Ack<space>
+nnoremap \| :Ack %:t:r<cr>
 
 " NOTE/TODO Search
-nnoremap <leader>\ :Ag "NOTE\|TODO\|DEBUG"<CR>
+nnoremap <leader>\ :Ack "NOTE\|TODO\|DEBUG"<CR>
 
 
 "======================================
@@ -436,13 +435,14 @@ nnoremap <leader>mo :Xmark!<cr>
 "======================================
 "   FZF
 "======================================
+let g:fzf_command_prefix = 'Fzf'
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
 let g:fzf_layout = { 'down': '20%' }
 
-nnoremap <C-f> :Files<space>
+nnoremap <C-f> :FzfFiles<space>
 
 
 "======================================
