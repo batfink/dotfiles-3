@@ -33,6 +33,7 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mileszs/ack.vim'
 Plug 'mxw/vim-jsx'
 Plug 'othree/html5.vim'
+Plug 'rhysd/vim-crystal'
 Plug 'pangloss/vim-javascript'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -130,6 +131,9 @@ nnoremap Q <Nop>
 
 " Force Highlight on search
 nnoremap / :set hlsearch<CR>/
+
+" Toggle spellcheck
+nnoremap <leader>s :set spell!<cr>
 
 " Get off my lawn
 nnoremap <Left> :echo "Use h"<CR>
@@ -552,11 +556,15 @@ autocmd BufRead,BufNewFile Gemfile* setlocal filetype=ruby
 autocmd Filetype json nnoremap <leader>j :%!jq .<cr>
 
 " Goyo + Limelight
-autocmd User GoyoEnter Limelight
-autocmd User GoyoLeave Limelight!
+" autocmd User GoyoEnter Limelight
+" autocmd User GoyoLeave Limelight!
 
 " Haskell
 autocmd Filetype haskell setlocal ai ts=2 sts=2 et sw=2
+
+" Highlight overlength characters
+" autocmd BufEnter * highlight OverLength ctermbg=242 guibg=#75715e
+" autocmd BufEnter * match OverLength /\%80v.*/
 
 " Set color depending on terminal color support
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
