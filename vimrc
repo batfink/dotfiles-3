@@ -11,9 +11,11 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'digitaltoad/vim-jade'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'fatih/vim-go'
+Plug 'flowtype/vim-flow'
 Plug 'garbas/vim-snipmate'
 Plug 'geekjuice/vim-picoline'
 Plug 'heavenshell/vim-jsdoc'
@@ -27,14 +29,14 @@ Plug 'junegunn/gv.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
 Plug 'kchmck/vim-coffee-script'
-Plug 'kien/ctrlp.vim'
 Plug 'lambdatoast/elm.vim'
+Plug 'leafgarland/typescript-vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mileszs/ack.vim'
 Plug 'mxw/vim-jsx'
 Plug 'othree/html5.vim'
-Plug 'rhysd/vim-crystal'
 Plug 'pangloss/vim-javascript'
+Plug 'rhysd/vim-crystal'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
@@ -405,8 +407,11 @@ nnoremap <leader>hn :HackerNews<cr>
 nnoremap <leader>// :JsDoc<cr>
 
 let g:jsdoc_default_mapping = 0
-let g:jsdoc_allow_input_prompt = 0
+let g:jsdoc_input_description = 1
+let g:jsdoc_return_description = 0
+let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_underscore_private = 0
+let g:jsdoc_access_descriptions = 0
 let g:jsdoc_enable_es6 = 1
 
 
@@ -465,6 +470,7 @@ let g:snipMate.snippet_version = 1
 "======================================
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+vmap <space>ac :EasyAlign \ allll { 'ig': ['!Comment'] }<cr>
 
 
 "======================================
@@ -479,7 +485,7 @@ nnoremap ms, :Dispatch! musigmachi spotify prev<CR>
 "======================================
 "   MARKDOWN
 "======================================
-let g:markdown_fenced_languages = ['json', 'javascript', 'sh']
+let g:markdown_fenced_languages = ['json', 'javascript', 'sh', 'typescript']
 
 
 "======================================
