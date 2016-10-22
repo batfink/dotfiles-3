@@ -23,11 +23,6 @@ PENV="$HOME/.dotfiles/.env"
 [ -e "$INCLUDE/aliases.git" ] && source "$INCLUDE/aliases.git"
 
 ##############################
-# TMUX SESSIONS
-##############################
-[ -e "$INCLUDE/aliases.tmux" ] && source "$INCLUDE/aliases.tmux"
-
-##############################
 # OS SPECIFIC ALIAS
 ##############################
 [[ "$(uname)" = *Darwin* ]] && source "$INCLUDE/aliases.osx"

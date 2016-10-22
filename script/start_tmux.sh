@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# DEPRECATED
+
 # Colors
 red='\e[0;31m'
 green='\e[0;32m'

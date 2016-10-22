@@ -33,6 +33,9 @@ alias rf="unalias -a && source $HOME/.profile"
 alias path="echo $PATH | tr ':' '\n'"
 alias ghi="ghci 2>&1 | HsColour -tty"
 
+# Tmux
+alias trs="$SCRIPT/tmux-resize.sh"
+
 # Node/NPM
 alias nup="npm up"
 alias nod!="npm outdated -g | grep -v 'linked' | tail -n+2 | cut -d ' ' -f 1 | tr '\n' ' '"
