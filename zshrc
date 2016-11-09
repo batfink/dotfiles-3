@@ -10,7 +10,6 @@ DOT=$HOME/.dotfiles
 source $HOME/.antigen/antigen.zsh
 
 antigen use oh-my-zsh
-antigen bundle git
 antigen bundle supercrabtree/k
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search

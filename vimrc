@@ -15,7 +15,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'digitaltoad/vim-jade'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'fatih/vim-go'
-Plug 'flowtype/vim-flow'
+" Plug 'flowtype/vim-flow'
 Plug 'garbas/vim-snipmate'
 Plug 'geekjuice/vim-picoline'
 Plug 'heavenshell/vim-jsdoc'
@@ -157,7 +157,10 @@ map <leader>[] :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> 
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Plug Updater
-nnoremap <leader>up :PlugUpgrade<cr>:PlugUpdate<cr>:PlugDiff<cr>
+nnoremap <leader>pi :PlugInstall<cr>
+nnoremap <leader>pc :PlugClean<cr>
+nnoremap <leader>pd :PlugDiff<cr>
+nnoremap <leader>pu :PlugUpgrade<cr>:PlugUpdate<cr>
 
 
 "======================================
@@ -413,6 +416,20 @@ let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_underscore_private = 0
 let g:jsdoc_access_descriptions = 0
 let g:jsdoc_enable_es6 = 1
+
+
+"======================================
+"   FLOW
+"======================================
+nnoremap <leader>fm :FlowMake<CR>
+nnoremap <leader>ft :FlowType<CR>
+
+" let g:flow#autoclose = 1
+" let g:flow#enable = 1
+" let g:flow#errjmp = 0
+" let g:flow#omnifunc = 1
+" let g:flow#timeout = 4
+" let g:flow#qfsize = 10
 
 
 "======================================
