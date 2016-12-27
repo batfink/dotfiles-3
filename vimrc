@@ -11,16 +11,17 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'cohama/lexima.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'digitaltoad/vim-jade'
-Plug 'eagletmt/ghcmod-vim'
+Plug 'digitaltoad/vim-pug'
+Plug 'eagletmt/ghcmod-vim' " deps: vimproc.vim
 Plug 'fatih/vim-go'
 " Plug 'flowtype/vim-flow'
-Plug 'garbas/vim-snipmate'
+Plug 'garbas/vim-snipmate' " deps: vim-addon-mw-utils, tlib_vim
 Plug 'geekjuice/vim-picoline'
+" Plug 'guns/vim-clojure-static'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'henrik/vim-qargs'
-Plug 'jgdavey/tslime.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
@@ -29,6 +30,7 @@ Plug 'junegunn/gv.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
 Plug 'kchmck/vim-coffee-script'
+" Plug 'kovisoft/paredit'
 Plug 'lambdatoast/elm.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -43,16 +45,16 @@ Plug 'scrooloose/syntastic'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tomtom/tlib_vim'
-Plug 'Townk/vim-autoclose'
-Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-haml'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+" Plug 'venantius/vim-eastwood'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 call plug#end()
@@ -290,19 +292,9 @@ if executable('ag')
 endif
 
 " Search mappings
-nnoremap K :Ack "\b<C-R><C-W>\b"<CR>
+nnoremap <leader>\ :Ack "\b<C-R><C-W>\b"<CR>
 nnoremap \ :Ack<space>
 nnoremap \| :Ack %:t:r<cr>
-
-" NOTE/TODO Search
-nnoremap <leader>\ :Ack "NOTE\|TODO\|DEBUG"<CR>
-
-
-"======================================
-"   TSLIME
-"======================================
-nmap <leader>rs <Plug>SetTmuxVars
-nnoremap <leader>: :Tmux<space>
 
 
 "======================================
@@ -421,8 +413,8 @@ let g:jsdoc_enable_es6 = 1
 "======================================
 "   FLOW
 "======================================
-nnoremap <leader>fm :FlowMake<CR>
-nnoremap <leader>ft :FlowType<CR>
+" nnoremap <leader>fm :FlowMake<CR>
+" nnoremap <leader>ft :FlowType<CR>
 
 " let g:flow#autoclose = 1
 " let g:flow#enable = 1
@@ -512,35 +504,6 @@ nnoremap <leader>ti :GhcModTypeInsert<CR>
 nnoremap <leader>ts :GhcModSplitFunCase<CR>
 nnoremap <leader>tt :GhcModType<CR>
 nnoremap <leader>tc :GhcModTypeClear<CR>
-nnoremap <leader>tl :call HaskellLoadFile()<CR>
-nnoremap <leader>tw :call HaskellToggleWatch()<CR>
-
-function! HaskellLoadFile()
-  execute "Tmux :load " . expand("%")
-endfunction
-
-let g:HaskellWatchingFiles = 0
-function! HaskellToggleWatch(...)
-  if &ft == 'haskell'
-    if g:HaskellWatchingFiles
-      let g:HaskellWatchingFiles = 0
-      echo "[Haskell] Unwatching files..."
-    else
-      let g:HaskellWatchingFiles = 1
-      echo "[Haskell] Watching files..."
-    endif
-  endif
-endfunction
-
-function! HaskellWatchAndLoad()
-  if &ft == "haskell"
-    if g:HaskellWatchingFiles
-      call HaskellLoadFile()
-    endif
-  endif
-endfunction
-
-autocmd BufWritePost * call HaskellWatchAndLoad()
 
 
 "======================================
@@ -578,12 +541,16 @@ autocmd BufRead,BufNewFile Gemfile* setlocal filetype=ruby
 " JSON
 autocmd Filetype json nnoremap <leader>j :%!jq .<cr>
 
+" Haskell
+autocmd Filetype haskell setlocal ai ts=2 sts=2 et sw=2
+
+" Clojure
+autocmd Filetype clojure nmap <c-c><c-k> :Require<cr>
+autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
+
 " Goyo + Limelight
 " autocmd User GoyoEnter Limelight
 " autocmd User GoyoLeave Limelight!
-
-" Haskell
-autocmd Filetype haskell setlocal ai ts=2 sts=2 et sw=2
 
 " Highlight overlength characters
 " autocmd BufEnter * highlight OverLength ctermbg=242 guibg=#75715e
