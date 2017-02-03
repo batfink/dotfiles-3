@@ -10,6 +10,7 @@ let g:vimtmp = "~/.dotfiles/vim/tmp/"
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
+" Plug 'Chiel92/vim-autoformat'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cohama/lexima.vim'
 Plug 'ctrlpvim/ctrlp.vim'

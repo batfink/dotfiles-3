@@ -76,19 +76,8 @@ alias rf='unalias -m "*" && source ~/.zshrc'
 # Executables
 export PATH=$DOT/bin:$PATH
 
-# Haskell/Cabal
-export PATH=$PATH:$HOME/.local/bin
-
-# Go
-export GOPATH=$HOME/.go
-export PATH=$PATH:$GOPATH:$GOPATH/bin
-
 # Nvm
-if [[ -s $HOME/.zprofile ]]; then
-    source $HOME/.zprofile
-else
-    [[ -s $HOME/.nvm/nvm.sh ]] && bash $HOME/.nvm/nvm.sh
-fi
+[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh
 
 # Clean up path
 [ -e $DOT/script/cleanup_path.sh ] && source $DOT/script/cleanup_path.sh
