@@ -10,17 +10,13 @@ let g:vimtmp = "~/.dotfiles/vim/tmp/"
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
-" Plug 'Chiel92/vim-autoformat'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cohama/lexima.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'eagletmt/ghcmod-vim' " deps: vimproc.vim
-Plug 'fatih/vim-go'
-" Plug 'flowtype/vim-flow'
 Plug 'garbas/vim-snipmate' " deps: vim-addon-mw-utils, tlib_vim
 Plug 'geekjuice/vim-picoline'
-" Plug 'guns/vim-clojure-static'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'henrik/vim-qargs'
 Plug 'junegunn/vim-easy-align'
@@ -30,19 +26,12 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
-Plug 'kchmck/vim-coffee-script'
-" Plug 'kovisoft/paredit'
-Plug 'lambdatoast/elm.vim'
-Plug 'leafgarland/typescript-vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mileszs/ack.vim'
-Plug 'mxw/vim-jsx'
-Plug 'othree/html5.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'rhysd/vim-crystal'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
+Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tomtom/tlib_vim'
@@ -50,13 +39,14 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-haml'
-Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-" Plug 'venantius/vim-eastwood'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" Plug 'flowtype/vim-flow'
+" Plug 'kovisoft/paredit'
+" Plug 'venantius/vim-eastwood'
 
 call plug#end()
 
@@ -83,7 +73,6 @@ let mapleader = " "
 " Read/Write
 nnoremap <leader>q <esc>:q
 nnoremap <leader>w <esc>:w<CR>:echo "File saved"<cr>
-nnoremap <leader>S <esc>:mks! .previous.vim<cr>:echo "Session saved"<cr>
 nnoremap <leader>W :w !sudo tee > /dev/null %<cr>
 
 " Splits
@@ -115,10 +104,6 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 nnoremap + <C-a>
 nnoremap - <C-x>
 
-" Folding
-nnoremap <leader><leader> za
-vnoremap <leader><leader> zf
-
 " move to beginning/end of line
 nnoremap B ^
 nnoremap E $
@@ -134,11 +119,8 @@ nnoremap <silent> <leader>vs :so $MYVIMRC<cr>:echo "VIMRC reloaded"<cr>
 " Screw Ex Mode
 nnoremap Q <Nop>
 
-" Force Highlight on search
-nnoremap / :set hlsearch<CR>/
-
-" Toggle spellcheck
-nnoremap <leader>s :set spell!<cr>
+" Toggle conceal
+nnoremap <leader><leader> :exec &conceallevel ? "set conceallevel=0" : "set conceallevel=1"<CR>
 
 " Get off my lawn
 nnoremap <Left> :echo "Use h"<CR>
@@ -175,6 +157,7 @@ set rtp+=~/.fzf
 
 set cole=0                              "concealing characters
 set complete=.,t                        "keep tab complete within file
+set concealcursor=nvic                  "
 set cursorline                          "highlight current cursor line
 set encoding=utf-8                      "utf8 encoding
 set fillchars=vert:\|,fold:-            "fill chars for status line
@@ -231,8 +214,37 @@ set nojoinspaces
 set splitbelow
 set splitright
 
-" Tab settings
-set guitablabel=%t
+
+"======================================
+"   TAB SETTINGS
+"======================================
+function! Tabline()
+  let s = ''
+  for i in range(tabpagenr('$'))
+    let tab = i + 1
+    let winnr = tabpagewinnr(tab)
+    let buflist = tabpagebuflist(tab)
+    let bufnr = buflist[winnr - 1]
+    let bufname = bufname(bufnr)
+    let bufmodified = getbufvar(bufnr, "&mod")
+    let selected = tab == tabpagenr()
+
+    let s .= '%' . tab . 'T'
+    let s .= (selected ? '%#TabLineSel#' : '%#TabLine#')
+    let s .= (selected ? '[ ' : ' ')
+    let s .= tab .':'
+    let s .= (bufname != '' ? fnamemodify(bufname, ':t') : 'No Name')
+    let s .= (selected ? ' ] ' : ' ')
+
+    if bufmodified
+      let s .= '[+] '
+    endif
+  endfor
+
+  let s .= '%#TabLineFill#'
+  return s
+endfunction
+set tabline=%!Tabline()
 
 
 "======================================
@@ -379,6 +391,7 @@ let g:goyo_callbacks = [ function('s:goyo_before'), function('s:goyo_after') ]
 "   JAVASCRIPT SYNTAX
 "======================================
 let g:jsx_ext_required = 0
+let g:javascript_plugin_flow = 0
 let g:javascript_enable_domhtmlcss  = 1
 let g:javascript_conceal_function   = "ƒ"
 let g:javascript_conceal_null       = "ø"
@@ -389,12 +402,6 @@ let g:javascript_conceal_NaN        = "ℕ"
 let g:javascript_conceal_prototype  = "¶"
 let g:javascript_conceal_static     = "•"
 let g:javascript_conceal_super      = "Ω"
-
-
-"======================================
-"   HACKER NEWS
-"======================================
-nnoremap <leader>hn :HackerNews<cr>
 
 
 "======================================
@@ -493,12 +500,6 @@ nnoremap ms, :Dispatch! musigmachi spotify prev<CR>
 
 
 "======================================
-"   MARKDOWN
-"======================================
-let g:markdown_fenced_languages = ['json', 'javascript', 'sh', 'typescript']
-
-
-"======================================
 "   HASKELL
 "======================================
 nnoremap <leader>ti :GhcModTypeInsert<CR>
@@ -513,15 +514,18 @@ nnoremap <leader>tc :GhcModTypeClear<CR>
 " Auto save last session on close
 execute "autocmd VimLeavePre * mksession! " . g:vimtmp . "previous.vim"
 
+" Highlight overlength characters
+autocmd BufEnter * highlight OverLength ctermbg=242 guibg=#75715e
+autocmd BufEnter * match OverLength /\%100v.*/
+
 " Git
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
 " Markdown
-autocmd BufRead,BufNewFile *.md setlocal spell textwidth=100 filetype=markdown
-autocmd Filetype markdown setlocal ai ts=4 sts=4 et sw=4
+autocmd Filetype markdown setlocal spell ai ts=4 sts=4 et sw=4
 
 " YAML
-autocmd BufRead,BufNewFile *.lyaml setlocal filetype=yaml
+autocmd BufRead,BufNewFile *.lyaml setlocal spell filetype=yaml
 autocmd Filetype yaml setlocal ai ts=2 sts=2 et sw=2
 
 " Shell
@@ -529,15 +533,8 @@ autocmd Filetype conf setlocal syntax=sh
 autocmd Filetype conf,sh,zsh setlocal ai ts=4 sts=4 et sw=4
 autocmd BufRead,BufNewFile .env* setlocal filetype=sh
 
-" HTML/Jade
-autocmd BufRead,BufNewFile *.handlebars setlocal filetype=html
-
 " Python
 autocmd Filetype python setlocal ai ts=4 sts=4 et sw=4
-
-" Ruby
-autocmd BufRead,BufNewFile *.ru setlocal filetype=ruby
-autocmd BufRead,BufNewFile Gemfile* setlocal filetype=ruby
 
 " JSON
 autocmd Filetype json nnoremap <leader>j :%!jq .<cr>
@@ -550,12 +547,8 @@ autocmd Filetype clojure nmap <c-c><c-k> :Require<cr>
 autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
 
 " Goyo + Limelight
-" autocmd User GoyoEnter Limelight
-" autocmd User GoyoLeave Limelight!
-
-" Highlight overlength characters
-" autocmd BufEnter * highlight OverLength ctermbg=242 guibg=#75715e
-" autocmd BufEnter * match OverLength /\%80v.*/
+autocmd User GoyoEnter Limelight
+autocmd User GoyoLeave Limelight!
 
 " Set color depending on terminal color support
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
