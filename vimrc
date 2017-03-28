@@ -44,9 +44,13 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+" Plug 'chrisbra/NrrwRgn'
 " Plug 'flowtype/vim-flow'
 " Plug 'kovisoft/paredit'
 " Plug 'venantius/vim-eastwood'
+" Plug 'venantius/vim-cljfmt'
+" Plug 'wesQ3/vim-windowswap'
+" Plug 'w0rp/ale'
 
 call plug#end()
 
@@ -515,8 +519,8 @@ nnoremap <leader>tc :GhcModTypeClear<CR>
 execute "autocmd VimLeavePre * mksession! " . g:vimtmp . "previous.vim"
 
 " Highlight overlength characters
-autocmd BufEnter * highlight OverLength ctermbg=242 guibg=#75715e
-autocmd BufEnter * match OverLength /\%100v.*/
+" autocmd BufEnter * highlight OverLength ctermbg=242 guibg=#75715e
+" autocmd BufEnter * match OverLength /\%101v.*/
 
 " Git
 autocmd Filetype gitcommit setlocal spell textwidth=72
@@ -525,7 +529,7 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 autocmd Filetype markdown setlocal spell ai ts=4 sts=4 et sw=4
 
 " YAML
-autocmd BufRead,BufNewFile *.lyaml setlocal spell filetype=yaml
+autocmd BufRead,BufNewFile *.lyaml setlocal filetype=yaml
 autocmd Filetype yaml setlocal ai ts=2 sts=2 et sw=2
 
 " Shell
@@ -535,6 +539,10 @@ autocmd BufRead,BufNewFile .env* setlocal filetype=sh
 
 " Python
 autocmd Filetype python setlocal ai ts=4 sts=4 et sw=4
+
+" Javascript
+" autocmd FileType javascript set formatprg=prettier\ --stdin
+" autocmd BufWritePre *.js exe "normal! gggqG\<C-o>\<C-o>"
 
 " JSON
 autocmd Filetype json nnoremap <leader>j :%!jq .<cr>

@@ -16,6 +16,9 @@ snippet module
 	/**
 	 * @module $0
 	 */
+# Use strict
+snippet strict
+	'use strict';
 # Import
 snippet import
 	import ${1:foo} from '${2:bar}';
@@ -23,7 +26,7 @@ snippet import
 snippet export
 	export default {
 	};
-# Commented Section
+# Commented section
 snippet section
 	//------------------------------------------------------------------------------
 	// $1
