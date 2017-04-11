@@ -1,35 +1,27 @@
 [user]
-	name = Nick Hwang
-	email = nhwang@hubspot.com
-[push]
-	default = upstream
-[color]
-	ui = auto
-[core]
-	editor = vim
-	excludesfile = ~/.gitignore
-	autocrlf = input
-[fetch]
-	prune = true
-[merge]
-	tool = vimdiff
-[diff]
-	tool = vimdiff
-[difftool]
-	prompt = true
-[rerere]
-	enabled = true
-	autoupdate = true
-[heroku]
-	account = personal
+  name = Nick Hwang
+  email = nhwang@hubspot.com
 [hub]
-	host = git.hubteam.com
-	host = github.com
-[filter "hawser"]
-	clean = git hawser clean %f
-	smudge = git hawser smudge %f
-	required = true
-[filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+  host = git.hubteam.com
+  host = github.com
+[core]
+  editor = vim
+  excludesfile = ~/.gitignore
+[color]
+  ui = auto
+[status]
+  showUntrackedFiles = all
+[push]
+  default = simple
+  followTags = true
+[fetch]
+  prune = true
+[merge]
+  ff = only
+  tool = vimdiff
+  conflictstyle = diff3
+[diff]
+  tool = vimdiff
+  conflictstyle = diff3
+[difftool]
+  prompt = true
