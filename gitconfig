@@ -1,0 +1,28 @@
+[user]
+  name = Nicholas Hwang
+  email = nhwang@hubspot.com
+[core]
+  editor = vim
+  excludesfile = ~/.gitignore
+	hooksPath = /Users/nhwang/.git_hooks
+[color]
+  ui = auto
+[status]
+  showUntrackedFiles = all
+[push]
+  default = simple
+  followTags = true
+[fetch]
+  prune = true
+[merge]
+  ff = only
+  tool = vimdiff
+  conflictstyle = diff3
+[diff]
+  tool = vimdiff
+  conflictstyle = diff3
+[difftool]
+  prompt = true
+[hub]
+  host = git.hubteam.com
+  host = github.com
