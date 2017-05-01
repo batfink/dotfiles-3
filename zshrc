@@ -20,3 +20,5 @@ antibody bundle zsh-users/zsh-history-substring-search
 
 source $DOTFILES_DIR/plugins/fzf.zsh
 source $DOTFILES_DIR/plugins/z.zsh
+
+alias tmux="tmux -2"
